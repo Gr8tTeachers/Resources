@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 5: Shopping for Large Items – EAL Level 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --navy: #1a2e5a;
+    --teal: #1e8c8a;
+    --gold: #f0a500;
+    --green: #2a9d5c;
+    --red: #d94f3d;
+    --light-teal: #e6f7f7;
+    --light-gold: #fff8e6;
+    --light-green: #e8f8ef;
+    --light-red: #fdf0ef;
+    --border: #d0dae8;
+    --text: #1e2b3a;
+    --muted: #5a6b80;
+    --shadow: 0 4px 20px rgba(26,46,90,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 32px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; top: -40px; right: -60px;
+    width: 320px; height: 320px;
+    background: var(--teal);
+    border-radius: 50%;
+    opacity: .15;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute; bottom: -50px; right: 120px;
+    width: 180px; height: 180px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: .12;
+  }
+  .header-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,.65);
+    font-weight: 300;
+  }
+
+  /* ── Nav tabs ── */
+  .tab-nav {
+    background: var(--navy);
+    padding: 0 32px;
+    display: flex;
+    gap: 4px;
+    border-bottom: 3px solid var(--teal);
+  }
+  .tab-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.55);
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    transition: all .2s;
+    letter-spacing: .5px;
+    position: relative;
+    bottom: -3px;
+  }
+  .tab-btn:hover { color: #fff; background: rgba(255,255,255,.08); }
+  .tab-btn.active {
+    background: var(--bg);
+    color: var(--navy);
+    border-bottom: 3px solid var(--bg);
+  }
+
+  /* ── Main layout ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-icon {
+    width: 52px; height: 52px; flex-shrink: 0;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .icon-purple { background: #ede9fe; }
+  .icon-blue   { background: var(--light-teal); }
+  .icon-orange { background: var(--light-gold); }
+  .section-meta h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px; font-weight: 800; color: var(--navy);
+  }
+  .section-meta p { font-size: 14px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+  /* ── Score bar ── */
+  .score-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+  .score-bar .label { font-size: 13px; font-weight: 700; color: var(--muted); flex: 1; }
+  .score-pill {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 15px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    background: var(--light-teal);
+    color: var(--teal);
+    min-width: 80px;
+    text-align: center;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 6px 28px rgba(26,46,90,0.13); }
+
+  .q-number {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: .5px;
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .q-text strong { color: var(--navy); }
+
+  /* ── Vocab options ── */
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media(max-width: 520px) { .options-grid { grid-template-columns: 1fr; } }
+
+  .opt-btn {
+    border: 2px solid var(--border);
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all .18s;
+    color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--teal);
+    background: var(--light-teal);
+    color: var(--teal);
+  }
+  .opt-btn.correct {
+    border-color: var(--green);
+    background: var(--light-green);
+    color: var(--green);
+  }
+  .opt-btn.wrong {
+    border-color: var(--red);
+    background: var(--light-red);
+    color: var(--red);
+  }
+  .opt-btn.reveal-correct {
+    border-color: var(--green);
+    background: var(--light-green);
+    color: var(--green);
+    opacity: .7;
+  }
+  .opt-icon { font-size: 16px; flex-shrink: 0; }
+
+  /* ── Feedback banner ── */
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: var(--light-green); color: #1a7042; border-left: 4px solid var(--green); }
+  .feedback.wrong   { background: var(--light-red);   color: #9b2b1e; border-left: 4px solid var(--red); }
+
+  /* ── Money / calculation inputs ── */
+  .money-input-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .money-prefix {
+    position: absolute; left: 12px;
+    font-weight: 700; color: var(--teal); font-size: 16px;
+  }
+  input[type="text"], input[type="number"] {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px 10px 28px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    width: 140px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+  }
+  input:focus { border-color: var(--teal); }
+  input.correct-input { border-color: var(--green); background: var(--light-green); }
+  input.wrong-input   { border-color: var(--red);   background: var(--light-red); }
+
+  .check-btn {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 10px 20px;
+    background: var(--teal);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .18s;
+    vertical-align: middle;
+    letter-spacing: .3px;
+  }
+  .check-btn:hover { background: #166e6c; }
+  .check-btn:disabled { background: #aac8c8; cursor: default; }
+
+  /* ── Calculation table ── */
+  .calc-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .calc-table th {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    letter-spacing: .5px;
+  }
+  .calc-table td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .calc-table tr:nth-child(even) td { background: #f9fbff; }
+  .calc-table td input { width: 120px; }
+  .calc-table td input[type="text"] { padding-left: 28px; }
+
+  /* ── Shopping receipt ── */
+  .receipt {
+    background: #fffdf0;
+    border: 1px dashed #c8b96a;
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 16px;
+  }
+  .receipt-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    text-align: center;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .receipt-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 4px 0;
+    border-bottom: 1px dotted #d4c97a;
+    color: var(--text);
+  }
+  .receipt-line:last-child { border-bottom: none; font-weight: 700; font-size: 15px; }
+  .receipt-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+
+  /* ── Grammar fill-in ── */
+  .phrase-card {
+    background: var(--card);
+    border-left: 5px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .phrase-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .blank-input {
+    display: inline-block;
+    border: none;
+    border-bottom: 3px solid var(--gold);
+    background: transparent;
+    width: 110px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--teal);
+    padding: 0 4px 2px;
+    outline: none;
+    text-align: center;
+    border-radius: 0;
+    transition: border-color .2s;
+  }
+  .blank-input:focus { border-color: var(--teal); }
+  .blank-input.correct-input { border-color: var(--green); color: var(--green); }
+  .blank-input.wrong-input   { border-color: var(--red);   color: var(--red); }
+
+  .word-bank {
+    background: var(--light-gold);
+    border: 1px solid #e8d072;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .word-bank h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8a6500;
+    margin-bottom: 10px;
+  }
+  .word-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: #fff;
+    border: 1.5px solid #d4b440;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #7a5a00;
+    cursor: default;
+  }
+  .chip.used { opacity: .4; text-decoration: line-through; }
+
+  /* ── Check all btn ── */
+  .check-all-btn {
+    display: block;
+    margin: 24px auto 0;
+    padding: 14px 40px;
+    background: var(--navy);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    letter-spacing: .5px;
+  }
+  .check-all-btn:hover { background: var(--teal); transform: translateY(-1px); }
+
+  /* ── Answer key ── */
+  .answer-key {
+    display: none;
+    background: #f0fff8;
+    border: 2px solid var(--green);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 28px;
+  }
+  .answer-key.show { display: block; }
+  .answer-key h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--green);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ak-item {
+    border-bottom: 1px solid #b8e8d0;
+    padding: 10px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .ak-item:last-child { border-bottom: none; }
+  .ak-q { font-weight: 700; color: var(--navy); }
+  .ak-a { color: #1a7042; margin-top: 3px; }
+
+  .toggle-key-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 11px 28px;
+    background: transparent;
+    color: var(--green);
+    border: 2px solid var(--green);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .toggle-key-btn:hover { background: var(--green); color: #fff; }
+
+  /* ── Info box ── */
+  .info-box {
+    background: var(--light-teal);
+    border: 1px solid #9fd8d7;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1a4f4e;
+  }
+  .info-box strong { color: var(--teal); }
+
+  /* ── Conversation match ── */
+  .convo-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  @media(max-width: 500px) { .convo-pair { grid-template-columns: 1fr; } }
+  .convo-say {
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a4f4e;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .convo-select {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .convo-select:focus { border-color: var(--teal); }
+  .convo-select.correct-input { border-color: var(--green); background: var(--light-green); }
+  .convo-select.wrong-input   { border-color: var(--red);   background: var(--light-red); }
+
+  /* ── Progress dots ── */
+  .progress-row {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .prog-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--border);
+    transition: background .3s;
+  }
+  .prog-dot.done { background: var(--teal); }
+  .prog-dot.correct { background: var(--green); }
+  .prog-dot.wrong { background: var(--red); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-label">EAL Level 2 · Numeracy & Literacy</div>
+  <h1 class="header-title">Lesson 5: Shopping for Large Items 🛒</h1>
+  <p class="header-sub">Read · Write · Calculate · Compare · Speak</p>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('vocab')">📚 Activity 1: Vocabulary</button>
+  <button class="tab-btn" onclick="showTab('money')">💰 Activity 2: Money Skills</button>
+  <button class="tab-btn" onclick="showTab('grammar')">🗣️ Activity 3: Speaking &amp; Grammar</button>
+</nav>
+
+<!-- ════════════════════════════════════
+     ACTIVITY 1: VOCABULARY
+════════════════════════════════════ -->
+<div id="sec-vocab" class="section active">
+<div class="main">
+
+  <div class="section-header">
+    <div class="section-icon icon-purple">📚</div>
+    <div class="section-meta">
+      <h2>Activity 1: Vocabulary</h2>
+      <p>Choose the correct word or phrase to complete each sentence. These words come from the lesson about shopping for large items.</p>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span class="label">Your score:</span>
+    <span class="score-pill" id="vocab-score">0 / 10</span>
+  </div>
+
+  <div class="progress-row" id="vocab-dots"></div>
+
+  <!-- Q1 -->
+  <div class="card" id="vq1">
+    <span class="q-number">Question 1</span>
+    <p class="q-text">When you buy something big like a washing machine, it is called a <strong>___</strong> purchase.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(1,this,'large')"><span class="opt-icon">🔵</span> large</button>
+      <button class="opt-btn" onclick="checkVocab(1,this,'small')"><span class="opt-icon">🔵</span> small</button>
+      <button class="opt-btn" onclick="checkVocab(1,this,'daily')"><span class="opt-icon">🔵</span> daily</button>
+      <button class="opt-btn" onclick="checkVocab(1,this,'quick')"><span class="opt-icon">🔵</span> quick</button>
+    </div>
+    <div class="feedback" id="vfb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="card" id="vq2">
+    <span class="q-number">Question 2</span>
+    <p class="q-text">Abdul and Fatimah looked at different shops to find the <strong>___</strong> price for a washing machine.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(2,this,'most expensive')"><span class="opt-icon">🔵</span> most expensive</button>
+      <button class="opt-btn" onclick="checkVocab(2,this,'cheapest')"><span class="opt-icon">🔵</span> cheapest</button>
+      <button class="opt-btn" onclick="checkVocab(2,this,'heaviest')"><span class="opt-icon">🔵</span> heaviest</button>
+      <button class="opt-btn" onclick="checkVocab(2,this,'oldest')"><span class="opt-icon">🔵</span> oldest</button>
+    </div>
+    <div class="feedback" id="vfb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card" id="vq3">
+    <span class="q-number">Question 3</span>
+    <p class="q-text">A <strong>___</strong> is a reduction in the price of something. For example, 15% off a washing machine.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(3,this,'add-on')"><span class="opt-icon">🔵</span> add-on</button>
+      <button class="opt-btn" onclick="checkVocab(3,this,'delivery')"><span class="opt-icon">🔵</span> delivery</button>
+      <button class="opt-btn" onclick="checkVocab(3,this,'discount')"><span class="opt-icon">🔵</span> discount</button>
+      <button class="opt-btn" onclick="checkVocab(3,this,'warranty')"><span class="opt-icon">🔵</span> warranty</button>
+    </div>
+    <div class="feedback" id="vfb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="card" id="vq4">
+    <span class="q-number">Question 4</span>
+    <p class="q-text">When a shop brings your item to your home, you pay for <strong>___</strong>.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(4,this,'delivery')"><span class="opt-icon">🔵</span> delivery</button>
+      <button class="opt-btn" onclick="checkVocab(4,this,'insurance')"><span class="opt-icon">🔵</span> insurance</button>
+      <button class="opt-btn" onclick="checkVocab(4,this,'warranty')"><span class="opt-icon">🔵</span> warranty</button>
+      <button class="opt-btn" onclick="checkVocab(4,this,'catalogue')"><span class="opt-icon">🔵</span> catalogue</button>
+    </div>
+    <div class="feedback" id="vfb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="card" id="vq5">
+    <span class="q-number">Question 5</span>
+    <p class="q-text">A <strong>___</strong> is a promise from the shop to repair or replace your item if it breaks within a certain time.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(5,this,'discount')"><span class="opt-icon">🔵</span> discount</button>
+      <button class="opt-btn" onclick="checkVocab(5,this,'retailer')"><span class="opt-icon">🔵</span> retailer</button>
+      <button class="opt-btn" onclick="checkVocab(5,this,'warranty')"><span class="opt-icon">🔵</span> warranty</button>
+      <button class="opt-btn" onclick="checkVocab(5,this,'delivery')"><span class="opt-icon">🔵</span> delivery</button>
+    </div>
+    <div class="feedback" id="vfb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="card" id="vq6">
+    <span class="q-number">Question 6</span>
+    <p class="q-text">A shop or company that sells goods to customers is called a <strong>___</strong>.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(6,this,'retailer')"><span class="opt-icon">🔵</span> retailer</button>
+      <button class="opt-btn" onclick="checkVocab(6,this,'customer')"><span class="opt-icon">🔵</span> customer</button>
+      <button class="opt-btn" onclick="checkVocab(6,this,'model')"><span class="opt-icon">🔵</span> model</button>
+      <button class="opt-btn" onclick="checkVocab(6,this,'catalogue')"><span class="opt-icon">🔵</span> catalogue</button>
+    </div>
+    <div class="feedback" id="vfb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="card" id="vq7">
+    <span class="q-number">Question 7</span>
+    <p class="q-text">A booklet that lists items and prices available from a store is called a <strong>___</strong>.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(7,this,'receipt')"><span class="opt-icon">🔵</span> receipt</button>
+      <button class="opt-btn" onclick="checkVocab(7,this,'catalogue')"><span class="opt-icon">🔵</span> catalogue</button>
+      <button class="opt-btn" onclick="checkVocab(7,this,'invoice')"><span class="opt-icon">🔵</span> invoice</button>
+      <button class="opt-btn" onclick="checkVocab(7,this,'brand')"><span class="opt-icon">🔵</span> brand</button>
+    </div>
+    <div class="feedback" id="vfb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="card" id="vq8">
+    <span class="q-number">Question 8</span>
+    <p class="q-text">Extras that you can choose to buy along with your main item, like delivery or extended warranty, are called <strong>___</strong>.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(8,this,'add-ons')"><span class="opt-icon">🔵</span> add-ons</button>
+      <button class="opt-btn" onclick="checkVocab(8,this,'discounts')"><span class="opt-icon">🔵</span> discounts</button>
+      <button class="opt-btn" onclick="checkVocab(8,this,'brands')"><span class="opt-icon">🔵</span> brands</button>
+      <button class="opt-btn" onclick="checkVocab(8,this,'models')"><span class="opt-icon">🔵</span> models</button>
+    </div>
+    <div class="feedback" id="vfb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="card" id="vq9">
+    <span class="q-number">Question 9</span>
+    <p class="q-text">When you look at different shops to find the best price, you are said to <strong>___</strong>.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(9,this,'compare prices')"><span class="opt-icon">🔵</span> compare prices</button>
+      <button class="opt-btn" onclick="checkVocab(9,this,'pay a deposit')"><span class="opt-icon">🔵</span> pay a deposit</button>
+      <button class="opt-btn" onclick="checkVocab(9,this,'get a refund')"><span class="opt-icon">🔵</span> get a refund</button>
+      <button class="opt-btn" onclick="checkVocab(9,this,'add an add-on')"><span class="opt-icon">🔵</span> add an add-on</button>
+    </div>
+    <div class="feedback" id="vfb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="card" id="vq10">
+    <span class="q-number">Question 10</span>
+    <p class="q-text">A <strong>percentage</strong> is a number out of <strong>___</strong>. For example, 20% means 20 out of ___.</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkVocab(10,this,'10')"><span class="opt-icon">🔵</span> 10</button>
+      <button class="opt-btn" onclick="checkVocab(10,this,'50')"><span class="opt-icon">🔵</span> 50</button>
+      <button class="opt-btn" onclick="checkVocab(10,this,'100')"><span class="opt-icon">🔵</span> 100</button>
+      <button class="opt-btn" onclick="checkVocab(10,this,'1000')"><span class="opt-icon">🔵</span> 1,000</button>
+    </div>
+    <div class="feedback" id="vfb10"></div>
+  </div>
+
+  <button class="toggle-key-btn" onclick="toggleKey('vocab-key')">📋 Show / Hide Answer Key</button>
+  <div class="answer-key" id="vocab-key">
+    <h3>✅ Answer Key – Activity 1</h3>
+    <div class="ak-item"><div class="ak-q">Q1. Large purchase</div><div class="ak-a">→ <strong>large</strong> — A "large purchase" means buying something expensive, like a fridge or washing machine.</div></div>
+    <div class="ak-item"><div class="ak-q">Q2. Finding the best price</div><div class="ak-a">→ <strong>cheapest</strong> — They compared shops to find the lowest price.</div></div>
+    <div class="ak-item"><div class="ak-q">Q3. Reduction in price</div><div class="ak-a">→ <strong>discount</strong> — A discount means you pay less. E.g. 15% off.</div></div>
+    <div class="ak-item"><div class="ak-q">Q4. Shop brings item to your home</div><div class="ak-a">→ <strong>delivery</strong> — You pay extra for delivery (e.g. $50–$90).</div></div>
+    <div class="ak-item"><div class="ak-q">Q5. Promise to repair/replace</div><div class="ak-a">→ <strong>warranty</strong> — An extended warranty gives you extra protection.</div></div>
+    <div class="ak-item"><div class="ak-q">Q6. A company that sells goods</div><div class="ak-a">→ <strong>retailer</strong> — Examples: Harvey Norman, JB Hi-Fi, The Good Guys.</div></div>
+    <div class="ak-item"><div class="ak-q">Q7. Booklet listing prices</div><div class="ak-a">→ <strong>catalogue</strong> — Many shops have online or paper catalogues.</div></div>
+    <div class="ak-item"><div class="ak-q">Q8. Extra items you can choose</div><div class="ak-a">→ <strong>add-ons</strong> — Add-ons cost extra on top of the main price.</div></div>
+    <div class="ak-item"><div class="ak-q">Q9. Looking at different shops</div><div class="ak-a">→ <strong>compare prices</strong> — Comparing prices helps you save money.</div></div>
+    <div class="ak-item"><div class="ak-q">Q10. Percentage is out of ___</div><div class="ak-a">→ <strong>100</strong> — Percent means "per hundred". 20% = 20/100 = 0.20.</div></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     ACTIVITY 2: MONEY SKILLS
+════════════════════════════════════ -->
+<div id="sec-money" class="section">
+<div class="main">
+
+  <div class="section-header">
+    <div class="section-icon icon-blue">💰</div>
+    <div class="section-meta">
+      <h2>Activity 2: Money Skills (Australian Context)</h2>
+      <p>Read the information, then answer the comprehension and calculation questions. Use Australian dollars ($).</p>
+    </div>
+  </div>
+
+  <!-- Reading passage -->
+  <div class="info-box">
+    <strong>📖 Read this first:</strong><br><br>
+    Mei and her husband are looking for a new fridge for their home in Melbourne. They check three Australian stores online. They find a fridge they like and compare the prices:<br><br>
+    <table class="calc-table" style="margin:10px 0;">
+      <thead><tr><th>Store</th><th>Price</th><th>Discount</th></tr></thead>
+      <tbody>
+        <tr><td>🛒 The Good Guys</td><td>$1,280</td><td>10% off</td></tr>
+        <tr><td>🛒 Harvey Norman</td><td>$1,150</td><td>5% off</td></tr>
+        <tr><td>🛒 JB Hi-Fi</td><td>$1,400</td><td>20% off</td></tr>
+      </tbody>
+    </table>
+    The Good Guys also offer: <strong>Delivery: $80</strong> | <strong>Extended warranty (2 years): $120</strong>
+  </div>
+
+  <!-- COMPREHENSION -->
+  <div class="card">
+    <span class="q-number">Comprehension – Question 1</span>
+    <p class="q-text">How many stores did Mei check online?</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkMoney('mc1',this,'2')"><span class="opt-icon">🔵</span> 2</button>
+      <button class="opt-btn" onclick="checkMoney('mc1',this,'3')"><span class="opt-icon">🔵</span> 3</button>
+      <button class="opt-btn" onclick="checkMoney('mc1',this,'4')"><span class="opt-icon">🔵</span> 4</button>
+      <button class="opt-btn" onclick="checkMoney('mc1',this,'5')"><span class="opt-icon">🔵</span> 5</button>
+    </div>
+    <div class="feedback" id="mfb_mc1"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Comprehension – Question 2</span>
+    <p class="q-text">Which store has the biggest discount percentage?</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkMoney('mc2',this,'The Good Guys')"><span class="opt-icon">🔵</span> The Good Guys (10%)</button>
+      <button class="opt-btn" onclick="checkMoney('mc2',this,'Harvey Norman')"><span class="opt-icon">🔵</span> Harvey Norman (5%)</button>
+      <button class="opt-btn" onclick="checkMoney('mc2',this,'JB Hi-Fi')"><span class="opt-icon">🔵</span> JB Hi-Fi (20%)</button>
+      <button class="opt-btn" onclick="checkMoney('mc2',this,'all the same')"><span class="opt-icon">🔵</span> They are all the same</button>
+    </div>
+    <div class="feedback" id="mfb_mc2"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Comprehension – Question 3</span>
+    <p class="q-text">What are two add-ons that The Good Guys offer?</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkMoney('mc3',this,'wrong')"><span class="opt-icon">🔵</span> Insurance and a new fridge</button>
+      <button class="opt-btn" onclick="checkMoney('mc3',this,'correct')"><span class="opt-icon">🔵</span> Delivery and extended warranty</button>
+      <button class="opt-btn" onclick="checkMoney('mc3',this,'wrong2')"><span class="opt-icon">🔵</span> Free delivery and free warranty</button>
+      <button class="opt-btn" onclick="checkMoney('mc3',this,'wrong3')"><span class="opt-icon">🔵</span> Catalogue and discount</button>
+    </div>
+    <div class="feedback" id="mfb_mc3"></div>
+  </div>
+
+  <!-- CALCULATION -->
+  <div class="card">
+    <span class="q-number">Calculation – Question 4</span>
+    <p class="q-text">The fridge at <strong>The Good Guys</strong> costs <strong>$1,280</strong> with a <strong>10% discount</strong>.<br>
+    Step 1: Work out 10% of $1,280.<br>
+    <em>Hint: $1,280 × 10% = ?</em></p>
+    <div class="money-input-wrap">
+      <span class="money-prefix">$</span>
+      <input type="text" id="calc_q4" placeholder="e.g. 128.00">
+    </div>
+    <button class="check-btn" onclick="checkCalc('q4', 128, 0.5)">Check ✓</button>
+    <div class="feedback" id="mfb_q4"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Calculation – Question 5</span>
+    <p class="q-text">Using your answer from Question 4, what is the <strong>final price</strong> of the fridge at The Good Guys?<br>
+    <em>Hint: $1,280 − $128 = ?</em></p>
+    <div class="money-input-wrap">
+      <span class="money-prefix">$</span>
+      <input type="text" id="calc_q5" placeholder="e.g. 1152.00">
+    </div>
+    <button class="check-btn" onclick="checkCalc('q5', 1152, 0.5)">Check ✓</button>
+    <div class="feedback" id="mfb_q5"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Calculation – Question 6</span>
+    <p class="q-text">The fridge at <strong>Harvey Norman</strong> costs <strong>$1,150</strong> with a <strong>5% discount</strong>.<br>
+    What is the final price after the discount?<br>
+    <em>Hint: First find 5% of $1,150. Then subtract it from $1,150.</em></p>
+    <div class="money-input-wrap">
+      <span class="money-prefix">$</span>
+      <input type="text" id="calc_q6" placeholder="e.g. 1092.50">
+    </div>
+    <button class="check-btn" onclick="checkCalc('q6', 1092.50, 0.5)">Check ✓</button>
+    <div class="feedback" id="mfb_q6"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Calculation – Question 7</span>
+    <p class="q-text">The fridge at <strong>JB Hi-Fi</strong> costs <strong>$1,400</strong> with a <strong>20% discount</strong>.<br>
+    What is the final price?<br>
+    <em>Hint: 20% of $1,400 = ? Then subtract.</em></p>
+    <div class="money-input-wrap">
+      <span class="money-prefix">$</span>
+      <input type="text" id="calc_q7" placeholder="e.g. 1120.00">
+    </div>
+    <button class="check-btn" onclick="checkCalc('q7', 1120, 0.5)">Check ✓</button>
+    <div class="feedback" id="mfb_q7"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Calculation – Question 8 ⭐ Challenge</span>
+    <p class="q-text">Mei chooses to buy from <strong>The Good Guys</strong> (final price: <strong>$1,152</strong>). She also adds:<br>
+    • Delivery: <strong>$80</strong><br>
+    • Extended warranty: <strong>$120</strong><br><br>
+    What is the <strong>total amount</strong> Mei pays?</p>
+    <div class="receipt">
+      <div class="receipt-title">🛒 THE GOOD GUYS – ORDER</div>
+      <div class="receipt-line"><span>Fridge (after 10% discount)</span><span>$1,152.00</span></div>
+      <div class="receipt-line"><span>Delivery</span><span>$80.00</span></div>
+      <div class="receipt-line"><span>Extended warranty</span><span>$120.00</span></div>
+      <div class="receipt-line"><span><strong>TOTAL</strong></span><span><strong>?</strong></span></div>
+    </div>
+    <div class="money-input-wrap">
+      <span class="money-prefix">$</span>
+      <input type="text" id="calc_q8" placeholder="e.g. 1352.00">
+    </div>
+    <button class="check-btn" onclick="checkCalc('q8', 1352, 0.5)">Check ✓</button>
+    <div class="feedback" id="mfb_q8"></div>
+  </div>
+
+  <div class="card">
+    <span class="q-number">Comparison – Question 9</span>
+    <p class="q-text">Look at the three <strong>final prices after discount</strong> (without add-ons):<br>
+    The Good Guys: <strong>$1,152</strong> · Harvey Norman: <strong>$1,092.50</strong> · JB Hi-Fi: <strong>$1,120</strong><br><br>
+    Which store has the <strong>cheapest</strong> final price for the fridge?</p>
+    <div class="options-grid">
+      <button class="opt-btn" onclick="checkMoney('mc9',this,'The Good Guys')"><span class="opt-icon">🔵</span> The Good Guys</button>
+      <button class="opt-btn" onclick="checkMoney('mc9',this,'Harvey Norman')"><span class="opt-icon">🔵</span> Harvey Norman</button>
+      <button class="opt-btn" onclick="checkMoney('mc9',this,'JB Hi-Fi')"><span class="opt-icon">🔵</span> JB Hi-Fi</button>
+    </div>
+    <div class="feedback" id="mfb_mc9"></div>
+  </div>
+
+  <button class="toggle-key-btn" onclick="toggleKey('money-key')">📋 Show / Hide Answer Key</button>
+  <div class="answer-key" id="money-key">
+    <h3>✅ Answer Key – Activity 2</h3>
+    <div class="ak-item"><div class="ak-q">Q1. How many stores?</div><div class="ak-a">→ <strong>3 stores</strong> (The Good Guys, Harvey Norman, JB Hi-Fi)</div></div>
+    <div class="ak-item"><div class="ak-q">Q2. Biggest discount?</div><div class="ak-a">→ <strong>JB Hi-Fi</strong> with 20% off</div></div>
+    <div class="ak-item"><div class="ak-q">Q3. Add-ons at The Good Guys?</div><div class="ak-a">→ <strong>Delivery ($80) and extended warranty ($120)</strong></div></div>
+    <div class="ak-item"><div class="ak-q">Q4. 10% of $1,280</div><div class="ak-a">→ <strong>$128.00</strong> ($1,280 × 0.10 = $128)</div></div>
+    <div class="ak-item"><div class="ak-q">Q5. Final price at The Good Guys</div><div class="ak-a">→ <strong>$1,152.00</strong> ($1,280 − $128 = $1,152)</div></div>
+    <div class="ak-item"><div class="ak-q">Q6. Final price at Harvey Norman (5% off $1,150)</div><div class="ak-a">→ <strong>$1,092.50</strong> (5% of $1,150 = $57.50 → $1,150 − $57.50 = $1,092.50)</div></div>
+    <div class="ak-item"><div class="ak-q">Q7. Final price at JB Hi-Fi (20% off $1,400)</div><div class="ak-a">→ <strong>$1,120.00</strong> (20% of $1,400 = $280 → $1,400 − $280 = $1,120)</div></div>
+    <div class="ak-item"><div class="ak-q">Q8. Total with add-ons</div><div class="ak-a">→ <strong>$1,352.00</strong> ($1,152 + $80 + $120 = $1,352)</div></div>
+    <div class="ak-item"><div class="ak-q">Q9. Cheapest store (after discount)</div><div class="ak-a">→ <strong>Harvey Norman</strong> at $1,092.50</div></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════════════════════════════
+     ACTIVITY 3: SPEAKING & GRAMMAR
+════════════════════════════════════ -->
+<div id="sec-grammar" class="section">
+<div class="main">
+
+  <div class="section-header">
+    <div class="section-icon icon-orange">🗣️</div>
+    <div class="section-meta">
+      <h2>Activity 3: Speaking &amp; Grammar</h2>
+      <p>Practice common shopping phrases. Fill in the blanks and match the conversations. Use the Word Bank to help you.</p>
+    </div>
+  </div>
+
+  <!-- Part A: Fill in blanks -->
+  <div class="card">
+    <span class="q-number">Part A – Fill in the Blanks</span>
+    <p class="q-text" style="margin-bottom:16px;">Use the Word Bank below to complete the everyday shopping phrases.</p>
+
+    <div class="word-bank">
+      <h4>📖 Word Bank</h4>
+      <div class="word-chips">
+        <span class="chip" id="chip-discount">discount</span>
+        <span class="chip" id="chip-final">final price</span>
+        <span class="chip" id="chip-delivery">delivery</span>
+        <span class="chip" id="chip-warranty">warranty</span>
+        <span class="chip" id="chip-cheapest">cheapest</span>
+        <span class="chip" id="chip-compare">compare</span>
+        <span class="chip" id="chip-off">off</span>
+        <span class="chip" id="chip-total">total</span>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <p class="phrase-text">1. "Excuse me, is there a <input class="blank-input" id="blank1" placeholder="____"> on this fridge?"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">2. "How much is the <input class="blank-input" id="blank2" placeholder="____"> after the discount?"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">3. "Does the price include <input class="blank-input" id="blank3" placeholder="____"> to my house?"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">4. "I want to <input class="blank-input" id="blank4" placeholder="____"> prices at three different stores."</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">5. "This washing machine is 20% <input class="blank-input" id="blank5" placeholder="____"> this weekend only!"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">6. "Can I get an extended <input class="blank-input" id="blank6" placeholder="____"> for this dishwasher?"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">7. "Which store has the <input class="blank-input" id="blank7" placeholder="____"> price for this model?"</p>
+    </div>
+    <div class="phrase-card">
+      <p class="phrase-text">8. "What is the <input class="blank-input" id="blank8" placeholder="____"> including delivery and warranty?"</p>
+    </div>
+
+    <button class="check-all-btn" onclick="checkBlanks()">Check All Answers ✓</button>
+    <div class="feedback" id="blanks-feedback" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- Part B: Conversation match -->
+  <div class="card">
+    <span class="q-number">Part B – Match the Conversation</span>
+    <p class="q-text" style="margin-bottom:16px;">A customer is shopping for a dryer. Match each customer question (left) with the correct shop assistant reply (right).</p>
+
+    <div class="convo-pair">
+      <div class="convo-say">🙋 "Is there a discount on this dryer?"</div>
+      <select class="convo-select" id="cv1">
+        <option value="">— Choose an answer —</option>
+        <option value="a">Yes! It's 15% off this week.</option>
+        <option value="b">Delivery costs $75.</option>
+        <option value="c">The warranty is 1 year.</option>
+        <option value="d">We have three different brands.</option>
+      </select>
+    </div>
+    <div class="convo-pair">
+      <div class="convo-say">🙋 "How much is delivery?"</div>
+      <select class="convo-select" id="cv2">
+        <option value="">— Choose an answer —</option>
+        <option value="a">Yes! It's 15% off this week.</option>
+        <option value="b">Delivery costs $75.</option>
+        <option value="c">The warranty is 1 year.</option>
+        <option value="d">We have three different brands.</option>
+      </select>
+    </div>
+    <div class="convo-pair">
+      <div class="convo-say">🙋 "How long is the warranty?"</div>
+      <select class="convo-select" id="cv3">
+        <option value="">— Choose an answer —</option>
+        <option value="a">Yes! It's 15% off this week.</option>
+        <option value="b">Delivery costs $75.</option>
+        <option value="c">The warranty is 1 year.</option>
+        <option value="d">We have three different brands.</option>
+      </select>
+    </div>
+    <div class="convo-pair">
+      <div class="convo-say">🙋 "Do you have different brands?"</div>
+      <select class="convo-select" id="cv4">
+        <option value="">— Choose an answer —</option>
+        <option value="a">Yes! It's 15% off this week.</option>
+        <option value="b">Delivery costs $75.</option>
+        <option value="c">The warranty is 1 year.</option>
+        <option value="d">We have three different brands.</option>
+      </select>
+    </div>
+
+    <button class="check-all-btn" onclick="checkConvo()">Check Matches ✓</button>
+    <div class="feedback" id="convo-feedback" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- Part C: Word order -->
+  <div class="card">
+    <span class="q-number">Part C – Put the Words in Order</span>
+    <p class="q-text" style="margin-bottom:16px;">Rearrange the words to make a correct shopping sentence. Type your answer in the box.</p>
+
+    <div class="phrase-card">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">🔀 Words: <strong>cheapest / is / which / store / the ?</strong></p>
+      <p class="phrase-text">Your sentence: <input class="blank-input" id="order1" placeholder="Type here..." style="width:260px;"></p>
+      <button class="check-btn" style="margin-top:8px;" onclick="checkOrder('order1','Which store is the cheapest?','ofb1')">Check ✓</button>
+      <div class="feedback" id="ofb1" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="phrase-card" style="margin-top:14px;">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">🔀 Words: <strong>price / final / the / is / what ?</strong></p>
+      <p class="phrase-text">Your sentence: <input class="blank-input" id="order2" placeholder="Type here..." style="width:260px;"></p>
+      <button class="check-btn" style="margin-top:8px;" onclick="checkOrder('order2','What is the final price?','ofb2')">Check ✓</button>
+      <div class="feedback" id="ofb2" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="phrase-card" style="margin-top:14px;">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">🔀 Words: <strong>off / the / washing machine / is / 20%</strong></p>
+      <p class="phrase-text">Your sentence: <input class="blank-input" id="order3" placeholder="Type here..." style="width:260px;"></p>
+      <button class="check-btn" style="margin-top:8px;" onclick="checkOrder('order3','The washing machine is 20% off.','ofb3')">Check ✓</button>
+      <div class="feedback" id="ofb3" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <button class="toggle-key-btn" onclick="toggleKey('grammar-key')">📋 Show / Hide Answer Key</button>
+  <div class="answer-key" id="grammar-key">
+    <h3>✅ Answer Key – Activity 3</h3>
+    <div style="font-family:'Nunito',sans-serif;font-weight:800;color:var(--navy);margin-bottom:8px;">Part A – Fill in the Blanks</div>
+    <div class="ak-item"><div class="ak-q">1.</div><div class="ak-a">→ <strong>discount</strong> ("Is there a discount on this fridge?")</div></div>
+    <div class="ak-item"><div class="ak-q">2.</div><div class="ak-a">→ <strong>final price</strong> ("How much is the final price after the discount?")</div></div>
+    <div class="ak-item"><div class="ak-q">3.</div><div class="ak-a">→ <strong>delivery</strong> ("Does the price include delivery to my house?")</div></div>
+    <div class="ak-item"><div class="ak-q">4.</div><div class="ak-a">→ <strong>compare</strong> ("I want to compare prices at three different stores.")</div></div>
+    <div class="ak-item"><div class="ak-q">5.</div><div class="ak-a">→ <strong>off</strong> ("This washing machine is 20% off this weekend only!")</div></div>
+    <div class="ak-item"><div class="ak-q">6.</div><div class="ak-a">→ <strong>warranty</strong> ("Can I get an extended warranty for this dishwasher?")</div></div>
+    <div class="ak-item"><div class="ak-q">7.</div><div class="ak-a">→ <strong>cheapest</strong> ("Which store has the cheapest price for this model?")</div></div>
+    <div class="ak-item"><div class="ak-q">8.</div><div class="ak-a">→ <strong>total</strong> ("What is the total including delivery and warranty?")</div></div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:800;color:var(--navy);margin:16px 0 8px;">Part B – Conversation Match</div>
+    <div class="ak-item"><div class="ak-q">"Is there a discount…?"</div><div class="ak-a">→ <strong>a) Yes! It's 15% off this week.</strong></div></div>
+    <div class="ak-item"><div class="ak-q">"How much is delivery?"</div><div class="ak-a">→ <strong>b) Delivery costs $75.</strong></div></div>
+    <div class="ak-item"><div class="ak-q">"How long is the warranty?"</div><div class="ak-a">→ <strong>c) The warranty is 1 year.</strong></div></div>
+    <div class="ak-item"><div class="ak-q">"Do you have different brands?"</div><div class="ak-a">→ <strong>d) We have three different brands.</strong></div></div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:800;color:var(--navy);margin:16px 0 8px;">Part C – Word Order</div>
+    <div class="ak-item"><div class="ak-q">1.</div><div class="ak-a">→ <strong>Which store is the cheapest?</strong></div></div>
+    <div class="ak-item"><div class="ak-q">2.</div><div class="ak-a">→ <strong>What is the final price?</strong></div></div>
+    <div class="ak-item"><div class="ak-q">3.</div><div class="ak-a">→ <strong>The washing machine is 20% off.</strong></div></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+// ── Tab navigation ──
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── Answer key toggle ──
+function toggleKey(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+
+// ── Vocab scores ──
+const VOCAB_ANSWERS = {
+  1:'large', 2:'cheapest', 3:'discount', 4:'delivery',
+  5:'warranty', 6:'retailer', 7:'catalogue', 8:'add-ons',
+  9:'compare prices', 10:'100'
+};
+const VOCAB_EXPLAIN = {
+  1:"✅ Correct! A 'large purchase' means buying something expensive like a fridge or washing machine.",
+  2:"✅ Correct! They compared shops to find the cheapest (lowest) price.",
+  3:"✅ Correct! A discount means you pay less. For example, 15% off.",
+  4:"✅ Correct! Delivery means the shop brings the item to your home.",
+  5:"✅ Correct! A warranty protects you if the item breaks.",
+  6:"✅ Correct! A retailer is a shop or company that sells goods.",
+  7:"✅ Correct! A catalogue lists items and prices from a store.",
+  8:"✅ Correct! Add-ons cost extra on top of the main price.",
+  9:"✅ Correct! Comparing prices helps you find the best deal.",
+  10:"✅ Correct! Percent means 'per hundred'. 20% = 20 out of 100."
+};
+
+let vocabScore = 0;
+const vocabDone = {};
+
+function initDots() {
+  const row = document.getElementById('vocab-dots');
+  for (let i = 1; i <= 10; i++) {
+    const d = document.createElement('div');
+    d.className = 'prog-dot';
+    d.id = 'dot' + i;
+    row.appendChild(d);
+  }
+}
+initDots();
+
+function checkVocab(qNum, btn, answer) {
+  if (vocabDone[qNum]) return;
+  vocabDone[qNum] = true;
+
+  const card = document.getElementById('vq' + qNum);
+  const fb = document.getElementById('vfb' + qNum);
+  const btns = card.querySelectorAll('.opt-btn');
+  const correct = VOCAB_ANSWERS[qNum];
+
+  btns.forEach(b => { b.disabled = true; b.querySelector('.opt-icon').textContent = '⚪'; });
+
+  if (answer === correct) {
+    btn.classList.add('correct');
+    btn.querySelector('.opt-icon').textContent = '✅';
+    fb.textContent = VOCAB_EXPLAIN[qNum];
+    fb.className = 'feedback show correct';
+    vocabScore++;
+    document.getElementById('dot' + qNum).className = 'prog-dot correct';
+  } else {
+    btn.classList.add('wrong');
+    btn.querySelector('.opt-icon').textContent = '❌';
+    // highlight correct
+    btns.forEach(b => {
+      if (b.textContent.trim().toLowerCase().includes(correct.toLowerCase())) {
+        b.classList.add('reveal-correct');
+        b.querySelector('.opt-icon').textContent = '✅';
+      }
+    });
+    fb.textContent = `❌ Not quite. The correct answer is "${correct}". ${VOCAB_EXPLAIN[qNum].replace('✅ Correct! ', '')}`;
+    fb.className = 'feedback show wrong';
+    document.getElementById('dot' + qNum).className = 'prog-dot wrong';
+  }
+  document.getElementById('vocab-score').textContent = vocabScore + ' / 10';
+}
+
+// ── Money MC answers ──
+const MONEY_MC = {
+  mc1: { correct: '3', explanation: "✅ Correct! Mei checked 3 stores: The Good Guys, Harvey Norman, and JB Hi-Fi." },
+  mc2: { correct: 'JB Hi-Fi', explanation: "✅ Correct! JB Hi-Fi offers the biggest discount at 20% off." },
+  mc3: { correct: 'correct', explanation: "✅ Correct! The Good Guys offer delivery ($80) and extended warranty ($120) as add-ons." },
+  mc9: { correct: 'Harvey Norman', explanation: "✅ Correct! Harvey Norman has the cheapest final price at $1,092.50." }
+};
+
+function checkMoney(id, btn, answer) {
+  if (btn.disabled) return;
+  const config = MONEY_MC[id];
+  const fb = document.getElementById('mfb_' + id);
+  const siblings = btn.parentElement.querySelectorAll('.opt-btn');
+  siblings.forEach(b => { b.disabled = true; });
+
+  if (answer === config.correct) {
+    btn.classList.add('correct');
+    btn.querySelector('.opt-icon').textContent = '✅';
+    fb.textContent = config.explanation;
+    fb.className = 'feedback show correct';
+  } else {
+    btn.classList.add('wrong');
+    btn.querySelector('.opt-icon').textContent = '❌';
+    fb.textContent = `❌ Not quite. ${config.explanation}`;
+    fb.className = 'feedback show wrong';
+  }
+}
+
+// ── Calculation check ──
+function checkCalc(id, correctVal, tolerance) {
+  const inp = document.getElementById('calc_' + id);
+  const fb = document.getElementById('mfb_' + id);
+  const raw = inp.value.replace(/[$,\s]/g, '');
+  const userVal = parseFloat(raw);
+
+  if (isNaN(userVal)) {
+    fb.textContent = "⚠️ Please enter a number (e.g. 128 or 1152.00)";
+    fb.className = 'feedback show wrong';
+    return;
+  }
+
+  if (Math.abs(userVal - correctVal) <= tolerance) {
+    inp.classList.add('correct-input'); inp.classList.remove('wrong-input');
+    fb.textContent = `✅ Correct! The answer is $${correctVal.toFixed(2)}.`;
+    fb.className = 'feedback show correct';
+    inp.disabled = true;
+    document.querySelector(`[onclick="checkCalc('${id}', ${correctVal}, ${tolerance})"]`).disabled = true;
+  } else {
+    inp.classList.add('wrong-input'); inp.classList.remove('correct-input');
+    fb.textContent = `❌ Not quite. Try again! Hint: the answer is $${correctVal.toFixed(2)}.`;
+    fb.className = 'feedback show wrong';
+  }
+}
+
+// ── Fill in blanks ──
+const BLANK_ANSWERS = {
+  blank1: ['discount'],
+  blank2: ['final price'],
+  blank3: ['delivery'],
+  blank4: ['compare'],
+  blank5: ['off'],
+  blank6: ['warranty'],
+  blank7: ['cheapest'],
+  blank8: ['total']
+};
+
+function checkBlanks() {
+  let correct = 0; let total = 8;
+  for (let i = 1; i <= 8; i++) {
+    const inp = document.getElementById('blank' + i);
+    const val = inp.value.trim().toLowerCase();
+    const accepted = BLANK_ANSWERS['blank' + i];
+    if (accepted.includes(val)) {
+      inp.classList.add('correct-input'); inp.classList.remove('wrong-input');
+      correct++;
+    } else {
+      inp.classList.add('wrong-input'); inp.classList.remove('correct-input');
+    }
+  }
+  const fb = document.getElementById('blanks-feedback');
+  if (correct === total) {
+    fb.textContent = `🎉 Excellent! All ${total} answers correct!`;
+    fb.className = 'feedback show correct';
+  } else {
+    fb.textContent = `You got ${correct} out of ${total} correct. Check the red boxes and try again. Use the Word Bank to help!`;
+    fb.className = 'feedback show wrong';
+  }
+}
+
+// ── Conversation match ──
+const CONVO_ANSWERS = { cv1:'a', cv2:'b', cv3:'c', cv4:'d' };
+
+function checkConvo() {
+  let correct = 0;
+  ['cv1','cv2','cv3','cv4'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (sel.value === CONVO_ANSWERS[id]) {
+      sel.classList.add('correct-input'); sel.classList.remove('wrong-input');
+      correct++;
+    } else {
+      sel.classList.add('wrong-input'); sel.classList.remove('correct-input');
+    }
+  });
+  const fb = document.getElementById('convo-feedback');
+  if (correct === 4) {
+    fb.textContent = "🎉 Perfect! All conversations matched correctly!";
+    fb.className = 'feedback show correct';
+  } else {
+    fb.textContent = `You matched ${correct} out of 4 correctly. Check the red boxes and try again.`;
+    fb.className = 'feedback show wrong';
+  }
+}
+
+// ── Word order ──
+function checkOrder(inputId, correctAnswer, fbId) {
+  const inp = document.getElementById(inputId);
+  const fb = document.getElementById(fbId);
+  const val = inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const ans = correctAnswer.toLowerCase().replace(/[?.!]/g,'').trim();
+  const valClean = val.replace(/[?.!]/g,'').trim();
+
+  if (valClean === ans) {
+    inp.classList.add('correct-input'); inp.classList.remove('wrong-input');
+    fb.textContent = `✅ Correct! "${correctAnswer}"`;
+    fb.className = 'feedback show correct';
+  } else {
+    inp.classList.add('wrong-input'); inp.classList.remove('correct-input');
+    fb.textContent = `❌ Not quite. The correct sentence is: "${correctAnswer}"`;
+    fb.className = 'feedback show wrong';
+  }
+}
+</script>
+</body>
+</html>
