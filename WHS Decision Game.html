@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workplace Safety Decision Game</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+    margin: 0;
+    padding: 20px;
+    color: #1f2937;
+  }
+
+  .game {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    animation: fadeIn 0.8s ease;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0f766e;
+  }
+
+  .score {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px;
+    color: #b45309;
+  }
+
+  .scenario {
+    background: #f0fdf4;
+    border-left: 8px solid #22c55e;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 20px;
+    line-height: 1.5;
+    animation: slideIn 0.5s ease;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: grid;
+    gap: 12px;
+  }
+
+  button {
+    padding: 15px;
+    font-size: 17px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+    transition: 0.25s;
+  }
+
+  button:hover {
+    transform: scale(1.03);
+    background: #1d4ed8;
+  }
+
+  .feedback {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    display: none;
+    animation: pop 0.4s ease;
+  }
+
+  .good {
+    background: #dcfce7;
+    border-left: 8px solid #16a34a;
+  }
+
+  .bad {
+    background: #fee2e2;
+    border-left: 8px solid #dc2626;
+  }
+
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .controls button {
+    background: #0f766e;
+  }
+
+  .end {
+    text-align: center;
+    font-size: 22px;
+    padding: 20px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="game">
+  <h1>Workplace Safety Decision Game</h1>
+  <p style="text-align:center;">Read each situation. Choose the safest action. Earn points for good decisions.</p>
+
+  <div class="score">Score: <span id="score">0</span></div>
+
+  <div id="content">
+    <div class="scenario" id="scenario"></div>
+    <div class="buttons" id="choices"></div>
+    <div class="feedback" id="feedback"></div>
+
+    <div class="controls">
+      <button onclick="readScenario()">🔊 Listen</button>
+      <button onclick="retryQuestion()">🔁 Retry</button>
+      <button onclick="nextQuestion()">➡️ Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    situation: "You see water on the floor near the kitchen. People are walking past.",
+    choices: [
+      {
+        text: "Walk around it and say nothing.",
+        points: 0,
+        feedback: "Not safe. Someone may slip and get injured."
+      },
+      {
+        text: "Tell your supervisor and put up a warning sign if safe to do so.",
+        points: 10,
+        feedback: "Good decision. You helped prevent an accident."
+      },
+      {
+        text: "Take a photo and send it to a friend.",
+        points: 0,
+        feedback: "This does not fix the hazard. Report it quickly."
+      }
+    ]
+  },
+  {
+    situation: "Your manager asks you to use a chemical cleaner, but you do not know how to use it safely.",
+    choices: [
+      {
+        text: "Use it quickly and hope it is okay.",
+        points: 0,
+        feedback: "Unsafe. Chemicals can be dangerous if used incorrectly."
+      },
+      {
+        text: "Ask for instructions, PPE, and the safety data sheet.",
+        points: 10,
+        feedback: "Excellent. Asking for safety information is the right action."
+      },
+      {
+        text: "Smell the chemical to check if it is strong.",
+        points: 0,
+        feedback: "Very unsafe. Never smell unknown chemicals directly."
+      }
+    ]
+  },
+  {
+    situation: "A box is too heavy for you to lift alone.",
+    choices: [
+      {
+        text: "Lift it quickly before anyone sees.",
+        points: 0,
+        feedback: "Unsafe. You could hurt your back."
+      },
+      {
+        text: "Ask for help or use lifting equipment.",
+        points: 10,
+        feedback: "Good choice. Safe lifting prevents injury."
+      },
+      {
+        text: "Drag it across the floor and block the walkway.",
+        points: 0,
+        feedback: "Unsafe. This creates another hazard."
+      }
+    ]
+  },
+  {
+    situation: "You notice a power cord across a walkway.",
+    choices: [
+      {
+        text: "Ignore it because it is not your job.",
+        points: 0,
+        feedback: "Unsafe. Everyone has a responsibility to help keep the workplace safe."
+      },
+      {
+        text: "Report it and move it safely if you are allowed to.",
+        points: 10,
+        feedback: "Correct. This reduces the risk of trips and falls."
+      },
+      {
+        text: "Step over it carefully.",
+        points: 2,
+        feedback: "This keeps you safe only for now, but others may still trip."
+      }
+    ]
+  },
+  {
+    situation: "A new worker is not wearing safety glasses in a required area.",
+    choices: [
+      {
+        text: "Laugh and say nothing.",
+        points: 0,
+        feedback: "Not appropriate. Safety is serious."
+      },
+      {
+        text: "Politely remind them and tell the supervisor if needed.",
+        points: 10,
+        feedback: "Good decision. You helped protect another worker."
+      },
+      {
+        text: "Take their safety glasses for yourself.",
+        points: 0,
+        feedback: "Unsafe and unfair. Everyone needs correct PPE."
+      }
+    ]
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function loadQuestion() {
+  answered = false;
+  document.getElementById("feedback").style.display = "none";
+
+  const q = questions[current];
+  document.getElementById("scenario").innerText =
+    `Situation ${current + 1}: ${q.situation}`;
+
+  const choicesDiv = document.getElementById("choices");
+  choicesDiv.innerHTML = "";
+
+  q.choices.forEach(choice => {
+    const btn = document.createElement("button");
+    btn.innerText = choice.text;
+    btn.onclick = () => chooseAnswer(choice);
+    choicesDiv.appendChild(btn);
+  });
+
+  readScenario();
+}
+
+function chooseAnswer(choice) {
+  if (answered) return;
+  answered = true;
+
+  score += choice.points;
+  document.getElementById("score").innerText = score;
+
+  const feedback = document.getElementById("feedback");
+  feedback.innerText = choice.feedback + ` You earned ${choice.points} point(s).`;
+  feedback.className = "feedback " + (choice.points >= 10 ? "good" : "bad");
+  feedback.style.display = "block";
+
+  speak(choice.feedback);
+}
+
+function nextQuestion() {
+  if (current < questions.length - 1) {
+    current++;
+    loadQuestion();
+  } else {
+    showEnd();
+  }
+}
+
+function retryQuestion() {
+  loadQuestion();
+}
+
+function showEnd() {
+  let message = "";
+
+  if (score >= 45) {
+    message = "Excellent! You made very safe workplace decisions.";
+  } else if (score >= 30) {
+    message = "Good work. Review the unsafe choices and try again.";
+  } else {
+    message = "Keep practising. Workplace safety decisions are important.";
+  }
+
+  document.getElementById("content").innerHTML = `
+    <div class="end">
+      <h2>Game Finished!</h2>
+      <p>Your final score is <strong>${score}</strong> out of 50.</p>
+      <p>${message}</p>
+      <button onclick="restartGame()">🔁 Play Again</button>
+    </div>
+  `;
+
+  speak(`Game finished. Your final score is ${score} out of 50. ${message}`);
+}
+
+function restartGame() {
+  current = 0;
+  score = 0;
+  document.getElementById("score").innerText = score;
+  location.reload();
+}
+
+function readScenario() {
+  const text = document.getElementById("scenario").innerText;
+  speak(text);
+}
+
+function speak(text) {
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-AU";
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
